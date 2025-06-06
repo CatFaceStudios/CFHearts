@@ -1,0 +1,13 @@
+{
+  "compatibilityLevel": "JAVA_8",
+  "minVersion": "0.8",
+  "package": "com.catface.cfhearts.mixin",
+  "refmap": "refmap.cfarmor.json",
+  "mixins": [],
+  "client": [
+    "MixinEntityLivingBase"
+  ],
+  "server": [
+    "MixinEntityLivingBase"
+  ]
+}

@@ -1,0 +1,23 @@
+itemGroup.tabHearts=Heart Items
+
+item.normal_heart_item.name=Heart
+item.bee_heart_item.name=Bee Heart
+item.creeper_heart_item.name=Creeper Heart
+item.ghast_heart_item.name=Ghast Heart
+item.gold_heart_item.name=Gold Heart
+item.ocelot_heart_item.name=Ocelot Heart
+item.potion_heart_item.name=Potion Heart
+item.sheep_heart_item.name=Sheep Heart
+item.slime_heart_item.name=Slime Heart
+item.wither_heart_item.name=Wither Heart
+
+item.normal_heart_power.name=Heart Power
+item.bee_heart_power.name=Bee Power
+item.creeper_heart_power.name=Creeper Power
+item.ghast_heart_power.name=Ghast Power
+item.gold_heart_power.name=Gold Power
+item.ocelot_heart_power.name=Ocelot Power
+item.potion_heart_power.name=Potion Power
+item.sheep_heart_power.name=Sheep Power
+item.slime_heart_power.name=Slime Power
+item.wither_heart_power.name=Wither Power

@@ -1,0 +1,6 @@
+{
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "cfhearts:item/power/creeper_heart"
+  }
+}

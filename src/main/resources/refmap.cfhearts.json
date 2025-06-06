@@ -1,0 +1,15 @@
+{
+  "mappings": {
+    "com/catface/cfhearts/mixin/MixinPlayer": {
+      "getMaxHealth": "Lnet/minecraft/entity/EntityLivingBase;getMaxHealth()F"
+
+    }
+  },
+  "data": {
+    "notch": {
+      "com/catface/cfhearts/mixin/MixinPlayer": {
+        "getMaxHealth": "Lnet/minecraft/entity/EntityLivingBase;getMaxHealth()F"
+      }
+    }
+  }
+}
