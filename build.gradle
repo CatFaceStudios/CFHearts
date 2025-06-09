@@ -14,7 +14,7 @@ apply plugin: 'net.minecraftforge.gradle'
 apply plugin: 'org.spongepowered.mixin'
 
 
-version = '1.0'
+version = '1.0.3'
 group = 'com.catface.cfhearts' // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = 'CFHearts'
 
@@ -62,7 +62,7 @@ dependencies {
     // that the dep is a ForgeGradle 'patcher' dependency. And it's patches will be applied.
     // The userdev artifact is a special name and will get all sorts of transformations applied to it.
     minecraft 'net.minecraftforge:forge:1.12.2-14.23.5.2859'
-
+    implementation files('RPA v2-1.0.4.jar')
     embed('org.spongepowered:mixin:0.8.3-SNAPSHOT') {
         exclude module: 'guava'
         exclude module: 'commons-io'

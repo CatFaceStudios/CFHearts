@@ -6,6 +6,7 @@ import com.catface.cfhearts.core.heartbar.HeartBar;
 import com.catface.cfhearts.core.heartbar.IHeartBar;
 import com.catface.cfhearts.core.hearts.item.power.HeartPowerBase;
 import com.catface.cfhearts.registries.ItemLoader;
+import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -14,7 +15,10 @@ import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumHand;
 import net.minecraft.world.World;
 
-public class HeartItemBase extends Item {
+import javax.annotation.Nullable;
+import java.util.List;
+
+public abstract class HeartItemBase extends Item {
 
     public HeartItemBase(String name){
         this.setRegistryName(name);
@@ -38,7 +42,7 @@ public class HeartItemBase extends Item {
                 bar.addCustomHeart(heart);
             }
 
-            if(!worldIn.isRemote) {
+            if(!worldIn.isRemote && heart != EnumHearts.BEE && heart != EnumHearts.OCELOT) {
                 stack.shrink(1);
                 HeartPowerBase heartPower = heart.getLinkedPower();
                 playerIn.addItemStackToInventory(new ItemStack(heartPower, 1));
@@ -49,4 +53,15 @@ public class HeartItemBase extends Item {
 
         return super.onItemRightClick(worldIn, playerIn, handIn);
     }
+
+    @Override
+    public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
+        super.addInformation(stack, worldIn, tooltip, flagIn);
+        //tooltip.add("Steal Hearts Mod");
+        addHeartInfo(stack,worldIn,tooltip,flagIn);
+    }
+
+    public abstract void addHeartInfo(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn);
+
+
 }

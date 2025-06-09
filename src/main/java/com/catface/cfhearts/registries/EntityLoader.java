@@ -1,9 +1,11 @@
 package com.catface.cfhearts.registries;
 
 import com.catface.cfhearts.CFHearts;
+import com.catface.cfhearts.client.render.RenderHeartArrow;
 import com.catface.cfhearts.client.render.RenderHeartBase;
 import com.catface.cfhearts.core.hearts.EnumHearts;
 import com.catface.cfhearts.core.hearts.entity.HeartBase;
+import com.catface.cfhearts.core.hearts.item.bow.HeartArrowEntity;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
@@ -20,6 +22,8 @@ public class EntityLoader {
         for(EnumHearts heart : EnumHearts.values()){
             registerEggless(heart.entityLocation.getResourcePath(), heart.entityClass);
         }
+
+        registerEggless("heart_arrow", HeartArrowEntity.class);
     }
 
     private static void registerEntity(final String name, final Class<? extends Entity> entityClass,
@@ -36,5 +40,6 @@ public class EntityLoader {
     @SideOnly(Side.CLIENT)
     public static void loadModels(){
         RenderingRegistry.registerEntityRenderingHandler(HeartBase.class, RenderHeartBase::new);
+        RenderingRegistry.registerEntityRenderingHandler(HeartArrowEntity.class, RenderHeartArrow::new);
     }
 }

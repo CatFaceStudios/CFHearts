@@ -13,7 +13,7 @@ public class HeartBar implements IHeartBar {
     private int maxHealth = 20;
     private List<EnumHearts> customHearts = new ArrayList<>();
     private boolean worm;
-    private int animLength;
+    private int animLength=100;
     private int animTick;
 
     @CapabilityInject(IHeartBar.class)
@@ -79,7 +79,7 @@ public class HeartBar implements IHeartBar {
 
     @Override
     public void setAnimationTick(int ticks) {
-        this.animTick = 0;
+        this.animTick = ticks;
     }
 
     @Override
@@ -93,7 +93,7 @@ public class HeartBar implements IHeartBar {
 
     @Override
     public void wormMunch() {
-        this.setMaxHealth(this.getMaxHealth()-1);
+        this.setMaxHealth(this.getMaxHealth()-2);
     }
 
     public static IHeartBar getHeartBar(EntityPlayer player) {

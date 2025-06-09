@@ -1,5 +1,6 @@
 package com.catface.cfhearts.client.gui;
 
+import com.catface.cfhearts.CFHearts;
 import com.catface.cfhearts.core.hearts.EnumHearts;
 import com.catface.cfhearts.core.heartbar.HeartBar;
 import com.catface.cfhearts.core.heartbar.IHeartBar;
@@ -36,6 +37,9 @@ public class RenderHeartBar {
         private static final ResourceLocation EMPTY_HEART = new ResourceLocation("cfhearts", "textures/gui/hearts/empty_heart.png");
         private static final ResourceLocation FILLED_HEART = new ResourceLocation("cfhearts", "textures/gui/hearts/filled_heart.png");
 
+        private static final ResourceLocation WORM_FRAME_1 = new ResourceLocation("cfhearts", "textures/gui/worm/worm1.png");
+        private static final ResourceLocation WORM_FRAME_2 = new ResourceLocation("cfhearts", "textures/gui/worm/worm2.png");
+
         // Vanilla HUD heart size (9x9 px), 1 pixel gap
         private static final int HEART_SIZE = 9;
         private static final int HEART_GAP = 0;
@@ -51,7 +55,12 @@ public class RenderHeartBar {
             if (event.getType() == RenderGameOverlayEvent.ElementType.HEALTH && Minecraft.getMinecraft().playerController.shouldDrawHUD()) {
                 event.setCanceled(true);
                 renderCustomHearts();
-                renderVanillaFoodBar(event.getResolution(), event.getPartialTicks());
+                this.mc.getTextureManager().bindTexture(ICONS);
+
+            }
+
+            if(event.getType() == RenderGameOverlayEvent.ElementType.ARMOR){
+                event.setCanceled(true);
             }
 
         }
@@ -138,6 +147,20 @@ public class RenderHeartBar {
                         0, 0, TEXTURE_SIZE / 2, TEXTURE_SIZE, TEXTURE_SIZE, TEXTURE_SIZE);
             }
 
+//            if (heartBar.hasWorm()) {
+//                int animTick = heartBar.getAnimationTick();
+//                ResourceLocation wormTexture = animTick % 2 == 0 ? WORM_FRAME_1 : WORM_FRAME_2;
+//                mc.getTextureManager().bindTexture(wormTexture);
+//                GlStateManager.color(1f, 1f, 1f, 1f);
+//
+//                double row = Math.floor(fullHearts/10.0);
+//                double column = (fullHearts%10)+1;
+//                int y = (int) ((TEXTURE_SIZE+HEART_GAP)*row);
+//                int x = (int) ((TEXTURE_SIZE+HEART_GAP)*column);
+//                //CFHearts.getLogger().info(x+" - "+y);
+//                drawTexturedModalRect(x, y, 0, 0, HEART_SIZE, HEART_SIZE);
+//            }
+
             GlStateManager.enableDepth();
             GlStateManager.disableBlend();
             GlStateManager.popMatrix();
@@ -151,7 +174,7 @@ public class RenderHeartBar {
             GlStateManager.tryBlendFuncSeparate(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA, GlStateManager.SourceFactor.ONE, GlStateManager.DestFactor.ZERO);
             GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
             this.mc.getTextureManager().bindTexture(ICONS);
-            renderPlayerStats(resolution,gui);
+            //renderPlayerStats(resolution,gui);
             GlStateManager.disableBlend();
             GlStateManager.popMatrix();
         }
@@ -184,15 +207,47 @@ public class RenderHeartBar {
             FoodStats foodstats = entityplayer.getFoodStats();
             int k = foodstats.getFoodLevel();
             IAttributeInstance iattributeinstance = entityplayer.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH);
-
+            int l = scaledRes.getScaledWidth() / 2 - 91;
             int i1 = scaledRes.getScaledWidth() / 2 + 91;
             int j1 = scaledRes.getScaledHeight() - 39;
             float f = (float)iattributeinstance.getAttributeValue();
             int k1 = MathHelper.ceil(entityplayer.getAbsorptionAmount());
             int l1 = MathHelper.ceil((f + (float)k1) / 2.0F / 10.0F);
-            // BS rand usage to match vanilla HUB
-            for (int j5 = MathHelper.ceil((f + (float)k1) / 2.0F) - 1; j5 >= 0; --j5) {
-                int l4 = this.rand.nextInt(2);
+            int i2 = Math.max(10 - (l1 - 2), 3);
+            int j2 = j1 - (l1 - 1) * i2 - 10;
+            int k2 = j1 - 10;
+            int l2 = k1;
+            int i3 = entityplayer.getTotalArmorValue();
+            int j3 = -1;
+
+            if (entityplayer.isPotionActive(MobEffects.REGENERATION))
+            {
+                j3 = this.updateCounter % MathHelper.ceil(f + 5.0F);
+            }
+
+            //this.mc.mcProfiler.startSection("armor");
+
+            for (int k3 = 0; k3 < 10; ++k3)
+            {
+                if (i3 > 0)
+                {
+                    int l3 = l + k3 * 8;
+
+                    if (k3 * 2 + 1 < i3)
+                    {
+                        this.drawTexturedModalRect(l3, j2, 34, 9, 9, 9);
+                    }
+
+                    if (k3 * 2 + 1 == i3)
+                    {
+                        this.drawTexturedModalRect(l3, j2, 25, 9, 9, 9);
+                    }
+
+                    if (k3 * 2 + 1 > i3)
+                    {
+                        this.drawTexturedModalRect(l3, j2, 16, 9, 9, 9);
+                    }
+                }
             }
 
 
@@ -202,7 +257,8 @@ public class RenderHeartBar {
 
             if (entity == null || !(entity instanceof EntityLivingBase))
             {
-
+                //this.mc.mcProfiler.endStartSection("food");
+                CFHearts.getLogger().info(j1);
                 for (int l5 = 0; l5 < 10; ++l5)
                 {
                     int j6 = j1;
@@ -215,7 +271,7 @@ public class RenderHeartBar {
                         j7 = 13;
                     }
 
-//                    if (entityplayer.getFoodStats().getSaturationLevel() <= 0.0F && updateCounter % (k * 3 + 1) == 0)
+//                    if (entityplayer.getFoodStats().getSaturationLevel() <= 0.0F && this.updateCounter % (k * 3 + 1) == 0)
 //                    {
 //                        j6 = j1 + (this.rand.nextInt(3) - 1);
 //                    }
@@ -234,6 +290,8 @@ public class RenderHeartBar {
                     }
                 }
             }
+
+            //this.mc.mcProfiler.endSection();
 
         }
     }

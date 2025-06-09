@@ -1,6 +1,33 @@
 {
-  "parent": "item/generated",
-  "textures": {
-    "layer0": "cfhearts:item/power/creeper_heart"
-  }
+	"credit": "Made with Blockbench",
+	"parent": "item/generated",
+	"textures": {
+		"layer0": "cfhearts:item/power/creeper_heart"
+	},
+	"display": {
+		"thirdperson_righthand": {
+			"translation": [0, 4.25, 1.5]
+		},
+		"thirdperson_lefthand": {
+			"translation": [0, 4.25, 1.5]
+		},
+		"firstperson_righthand": {
+			"rotation": [-28, -69, 3],
+			"translation": [1.25, 3.25, 0]
+		},
+		"firstperson_lefthand": {
+			"rotation": [-28, -69, 3],
+			"translation": [1.25, 3.25, 0]
+		},
+		"ground": {
+			"translation": [0, 2.5, 0],
+			"scale": [0.5, 0.5, 0.5]
+		},
+		"gui": {
+			"scale": [1.77, 1.77, 1]
+		},
+		"head": {
+			"scale": [0, 0, 0]
+		}
+	}
 }

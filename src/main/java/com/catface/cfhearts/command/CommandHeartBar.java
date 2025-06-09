@@ -50,6 +50,15 @@ public class CommandHeartBar extends CommandBase {
                     }
                 }
                 break;
+            case "lose":
+                for (EntityPlayerMP player : targets) {
+                    IHeartBar bar = player.getCapability(HeartBar.HEART_BAR_CAPABILITY, null);
+                    if (bar != null) {
+                        bar.setMaxHealth(bar.getMaxHealth()-2);
+                    }
+                    CFHearts.packetHandler.network.sendTo(new PacketSyncHeartBar(bar), player);
+                }
+                break;
 
             case "set":
                 if (args.length < 4)
@@ -72,6 +81,7 @@ public class CommandHeartBar extends CommandBase {
                                     player.setHealth(heartBar.getMaxHealth());
                                 }
                                 break;
+
                             case "worm":
                                 heartBar.setWorm(parseBoolean(value));
                                 break;
@@ -90,7 +100,16 @@ public class CommandHeartBar extends CommandBase {
                     notifyCommandListener(sender, this, "HeartBar updated for %s", player.getName());
                 }
                 break;
-
+            case "clear":
+                for (EntityPlayerMP player : targets) {
+                    IHeartBar bar = player.getCapability(HeartBar.HEART_BAR_CAPABILITY, null);
+                    if (bar != null) {
+                        bar.getCustomHeartList().clear();
+                        CFHearts.packetHandler.network.sendTo(new PacketSyncHeartBar(bar), player);
+                    }
+                    notifyCommandListener(sender, this, "HeartBar cleared for %s", player.getName());
+                }
+                break;
             case "add":
             case "remove":
                 if (args.length < 3)

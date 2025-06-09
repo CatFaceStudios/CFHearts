@@ -1,4 +1,6 @@
-itemGroup.tabHearts=Heart Items
+itemGroup.tabHearts=Steal Hearts Mod
+item.heart_bow.name=Heart Stealing Bow
+item.heart_arrow.name=Heart Arrow
 
 item.normal_heart_item.name=Heart
 item.bee_heart_item.name=Bee Heart
@@ -10,14 +12,18 @@ item.potion_heart_item.name=Potion Heart
 item.sheep_heart_item.name=Sheep Heart
 item.slime_heart_item.name=Slime Heart
 item.wither_heart_item.name=Wither Heart
+item.clock_heart_item.name=Clock Heart
+item.ban_heart_item.name=Ban Heart
 
 item.normal_heart_power.name=Heart Power
 item.bee_heart_power.name=Bee Power
-item.creeper_heart_power.name=Creeper Power
+item.creeper_heart_power.name=Creeper Doll
 item.ghast_heart_power.name=Ghast Power
-item.gold_heart_power.name=Gold Power
-item.ocelot_heart_power.name=Ocelot Power
+item.gold_heart_power.name=Mida Touch
+item.ocelot_heart_power.name=Ocelot Speed Boots
 item.potion_heart_power.name=Potion Power
-item.sheep_heart_power.name=Sheep Power
+item.sheep_heart_power.name=Wool Wall
 item.slime_heart_power.name=Slime Power
-item.wither_heart_power.name=Wither Power
+item.wither_heart_power.name=Wither Lure
+item.clock_heart_power.name=Clock Lure
+item.ban_heart_power.name=Ban Hammer

@@ -10,7 +10,7 @@ import net.minecraft.world.WorldServer;
 public class HeartCreeper extends HeartArrow{
     public HeartCreeper(World worldIn) {
         super(worldIn);
-        this.speed = 0.5f;
+        this.speed = 1.0f;
         this.maxTime = 200;
     }
 
@@ -31,7 +31,7 @@ public class HeartCreeper extends HeartArrow{
     public void onEnd() {
         CFHearts.getLogger().info("heart creeper end");
         Vec3d vec = this.getPositionVector();
-        this.world.createExplosion(this, vec.x,vec.y,vec.z,3.0f,true);
+        this.world.createExplosion(this, vec.x,vec.y,vec.z,2.0f,true);
 
     }
 
@@ -40,7 +40,7 @@ public class HeartCreeper extends HeartArrow{
         CFHearts.getLogger().info("heart creeper impact");
         Vec3d vec = result.hitVec;
         if(vec != null) {
-            this.world.createExplosion(this, vec.x,vec.y,vec.z,3.0f,true);
+            this.world.createExplosion(this, vec.x,vec.y,vec.z,2.0f,true);
         }
         this.setDead();
     }
