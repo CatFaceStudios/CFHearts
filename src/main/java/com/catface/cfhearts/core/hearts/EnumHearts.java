@@ -74,16 +74,17 @@ public enum EnumHearts {
             if(!bar.getCustomHeartList().contains(heart)){
 
             }
-        } else if (stack.getItem() instanceof HeartItemBase){
-            heart = EnumHearts.getLinkedItem((HeartItemBase) stack.getItem());
-            if(heart == NORMAL){
-                stack.setCount(0);
-                bar.setMaxHealth(bar.getMaxHealth()+2);
-                if(player instanceof EntityPlayerMP){
-                    CFHearts.packetHandler.network.sendTo((IMessage) new PacketSyncHeartBar(bar), (EntityPlayerMP) player);
-                }
-            }
         }
+//        else if (stack.getItem() instanceof HeartItemBase){
+//            heart = EnumHearts.getLinkedItem((HeartItemBase) stack.getItem());
+//            if(heart == NORMAL){
+//                stack.setCount(0);
+//                bar.setMaxHealth(bar.getMaxHealth()+2);
+//                if(player instanceof EntityPlayerMP){
+//                    CFHearts.packetHandler.network.sendTo((IMessage) new PacketSyncHeartBar(bar), (EntityPlayerMP) player);
+//                }
+//            }
+//        }
 
     }
 

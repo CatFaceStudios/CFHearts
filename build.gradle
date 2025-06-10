@@ -14,7 +14,7 @@ apply plugin: 'net.minecraftforge.gradle'
 apply plugin: 'org.spongepowered.mixin'
 
 
-version = '1.0.3'
+version = '1.0.4'
 group = 'com.catface.cfhearts' // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = 'CFHearts'
 
